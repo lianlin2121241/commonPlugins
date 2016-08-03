@@ -1,0 +1,158 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" type="text/css" href="css/content_u4.css">
+    <script type="text/javascript" src="../../../libs/jquery-1.8.3.js"></script>
+    <script type="text/javascript" src="../../../libs/jquery-ui/jquery.ui.core.min.js"></script>
+    <script type="text/javascript" src="../../../libs/jquery-ui/jquery.ui.widget.min.js"></script>
+    <script type="text/javascript" src="../../../libs/jquery-ui/jquery.ui.position.min.js"></script>
+    <!-- <script type="text/javascript" src="../../mouseWheel/js/jquery.mousewheel.js"></script> -->
+    <script type="text/javascript" src="../../niceScroll/js/jquery.nicescroll_u1.js"></script>
+    <script type="text/javascript" src="js/jquery.zl_select_u4.js"></script>
+    <title></title>
+    <style type="text/css">
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+        select{
+            margin: 0px;
+            padding: 0px;
+        }
+    </style>
+    <script>
+        var newAdd;
+        $(function () {
+            $("select.a").zl_select({
+                w: 200, h: 30,
+                items_w: "300px",
+                selectDropPanel:$("body"),
+                disabledClickCallback: function(){
+                    console.log("我被禁用了，我是"+this);
+                },
+                completeCallback:function(){
+                    console.log("我被加载完了，我是"+this);
+                }
+            });
+
+            $("#chbDisabled").click(function(){
+                if($(this).is(":checked")){
+                    $("select.a").prop("disabled",true);
+                }else{
+                    $("select.a").prop("disabled",false);
+                }
+                $("select.a").zl_select("changeState");
+            })
+
+//            $("#panel").niceScroll();
+        })
+        function select_two() {
+            $(">select", ".zl_select").val("2");
+            $(">select", ".zl_select").trigger("change");
+        }
+        function select_four() {
+            $(">select", ".zl_select").val("4");
+            $(">select", ".zl_select").trigger("change");
+        }
+        function clone() {
+            var a = $("#test").clone(true).removeAttr("id");
+            a.appendTo("#selectPanel");
+            a.zl_select({
+                w: 200
+                , h: 30
+            })
+        }
+        function addItems() {
+            $("<option value='6'>六</option>").appendTo("select.a");
+            $("<option value='7'>七</option>").appendTo("select.a");
+            $("select.a").zl_select("reloadData");
+        }
+        function showTop(){
+            var panelClone=$("#topPanel").clone(true).appendTo(top.document.body).show();
+            $("#topSelect",panelClone).zl_select({
+                w: 200, h: 30,
+                items_w: "300px",
+//                selectDropPanel:$("body",top.document),
+            });
+//            top.initSelect();
+            setTimeout(function(){
+                var optionStr="<option value=''>请选择</option>"+
+                        "<option value='2'>请选择2</option>"+
+                        "<option value='3'>请选择3</option>"+
+                        "<option value='4'>请选择4</option>"+
+                        "<option value='4'>请选择4</option>"+
+                        "<option value='4'>请选择4</option>"+
+                        "<option value='4'>请选择4</option>"+
+                        "<option value='4'>请选择4</option>"+
+                        "<option value='5'>请选择5</option>";
+                $("#topSelect",panelClone).append(optionStr);
+                $("#topSelect",panelClone).zl_select("reloadData");
+            },1000)
+        }
+        function distory() {
+            $("select.a").zl_select("distory");
+            $("#topSelect",top.document).zl_select("distory");
+        }
+    </script>
+
+</head>
+<body>
+<div id="panel" style="overflow: auto; height:400px;">
+    <div style="height: 200px;background-color: red; width: 1920px;"></div>
+    <div id="selectPanel">
+        <select class="a" disabled="disabled">
+            <option value="1">第一项</option>
+            <option value="2">第二项</option>
+            <option value="3">第三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三项</option>
+            <option value="4" selected="selected">第四项</option>
+            <option value="5">第五项</option>
+        </select>
+        <select class="a">
+            <option value="1">一</option>
+            <option value="2">二</option>
+            <option value="3">三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三</option>
+            <option value="4" selected="selected">四</option>
+            <option value="5">五</option>
+        </select>
+        <select class="a">
+            <option value="1">1一</option>
+            <option value="2">1二</option>
+            <option value="3">1三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三</option>
+            <option value="4" selected="selected">1四</option>
+            <option value="5">1五</option>
+        </select>
+        <select class="a">
+            <option value="">请选择</option>
+            <option value="1">12一</option>
+            <option value="2">12二</option>
+            <option value="3">12三三三三三三三三三三</option>
+            <option value="4" selected="selected">12四</option>
+            <option value="5">12五</option>
+        </select>
+        <select id="test" style="display: none;">
+            <option value="1">一</option>
+            <option value="2">二</option>
+            <option value="3">三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三</option>
+            <option value="4" selected="selected">四</option>
+            <option value="5">五</option>
+        </select>
+    </div>
+    <button onClick="select_two()">第二项</button>
+    <button onClick="select_four()">第四项</button>
+    <button onClick="clone()">克隆</button>
+    <button onClick="addItems()">动态增加选项</button>
+    <button onClick="showTop()">打开弹出层</button>
+    <button onClick="distory()">销毁select</button>
+    <input id="chbDisabled" type="checkbox"/>禁用下拉
+    <div style="height: 200px;background-color: blue;"></div>
+
+    <div id="topPanel" style="display: none;position:absolute;background: rgba(0,0,0,0.2); top: 50px;left: 50%;width: 500px;height: 500px;margin-left: -250px;">
+        <p>弹出层</p>
+        <ul>
+            <li><label for="">弹出层select</label><select name="" id="topSelect"></select></li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

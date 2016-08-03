@@ -1,0 +1,104 @@
+.zl_select{
+    vertical-align: middle;
+    position: relative;
+}
+
+/*****************************************  select内容样式 start ********************************************/
+.zl_select .select-container {
+    background: url("../images/alpha30black.png");
+    border: 0;
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    line-height: 26px;
+    padding: 0 0 0 14px;
+    color: #999999;
+    text-decoration: none;
+    outline:none;
+    border-radius: 4px;
+    font-size: 12px;
+    font-family: \5FAE\8F6F\96C5\9ED1;
+}
+.zl_select .select-container.has-val{
+    color: #ffffff;
+    background: url("../images/alpha50black.png");
+}
+.zl_select .select-container.active {
+    background: url("../images/alpha50black.png");
+}
+.zl_select .select-container.disabled {
+    border-color: #999999;
+    background: #eaeaea;
+    color: #999999;
+}
+.zl_select .select-container .icon{
+    width:20px;
+    height:100%;
+    float:right;
+    clear:right;
+    background:url(../images/icon.png) no-repeat 0px 55%;
+    position:absolute;
+    right:0px;
+}
+.zl_select .select-container.active .icon {
+    background:url(../images/icon_active.png) no-repeat 0px 55%;
+}
+.zl_select .select-container .content{
+    display: block;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+    text-align:left;
+}
+/*****************************************  select内容样式 end ********************************************/
+
+/*****************************************  select下拉内容样式 start ********************************************/
+.select-drop{
+    position: absolute;
+    display: none;
+    height: auto;
+    background: url("../images/alpha30black.png");
+    z-index: 10000;
+    margin-top: -1px;
+    overflow-y: auto;
+    max-height: 160px;
+}
+.select-drop ul.items{
+    list-style:none;
+    margin:0px;
+    padding:0px;
+}
+.select-drop ul.items li{
+    cursor:pointer;
+    word-warp: break-word;
+    word-break: break-all;/*Only work in IE*/
+    text-align: left;
+    padding-left: 14px;
+    color:#FFFFFF;
+    line-height: 24px;
+    font-family: \5FAE\8F6F\96C5\9ED1;
+    font-size: 12px;
+}
+.select-drop ul.items li.over{
+    background:url("../images/alpha50black.png");
+}
+.select-drop ul.items li.down{
+    background:url("../images/alpha50black.png");
+}
+/*****************************************  select下拉内容样式 end ********************************************/
+
+/*****************************************  select下拉内容位置样式 start ********************************************/
+.zl_select .select-container.positionBottom,.select-drop.positionTop {
+    border-top-left-radius:0px;
+    border-top-right-radius:0px;
+    border-bottom-left-radius:4px;
+    border-bottom-right-radius:4px;
+}
+.zl_select .select-container.positionTop,.select-drop.positionBottom {
+    border-top-left-radius:4px;
+    border-top-right-radius:4px;
+    border-bottom-left-radius:0px;
+    border-bottom-right-radius:0px;
+}
+/*****************************************  select下拉内容位置样式 end ********************************************/

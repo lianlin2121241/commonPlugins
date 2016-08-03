@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="../../libs/jquery-1.8.3.js"></script>
+    <script type="text/javascript" src="js/jquery.mousewheel.js"></script>
+    <script>
+        $(function(){
+            //$("#my_elem").bind("mousewheel",mousewheelHandle);
+            //document.getElementById("my_elem").onmousewheel=mousewheelHandle;
+            $("#my_elem").mousewheel(function(event, delta, deltaX, deltaY) {
+                console.log(delta, deltaX, deltaY);
+            });
+        })
+    </script>
+</head>
+<body>
+    <span>body</span>
+    <div id="my_elem" style="height:100px;font-size: 20px;width: 500px;overflow: auto;">法律的风景法律的风景法律的风景法律的风景法律的风景法律的风景法律的风景法律的风景法律的风景法律的风景法律的风景法律的风景法律的风景法律的风景法律的风景法律的风景法律的风景法律的风景法律的风景法律的风景法律的风景法律的风景法律的风景</div>
+</body>
+</html>

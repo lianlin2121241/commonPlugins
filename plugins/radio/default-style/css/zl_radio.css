@@ -1,0 +1,41 @@
+/* CSS Document */
+.zl_radio_normal{
+	background: url(../images/radio.png) no-repeat 0 1px;
+	width: auto;
+	min-width: 12px;
+	height: 16px;
+	line-height: 16px;
+	/* float: left; */
+	display: inline-block;
+	cursor: pointer;
+	vertical-align: middle;
+}
+.zl_radio_down{
+	background:url(../images/radio_down.png) no-repeat 0 1px;
+	width:auto;
+	min-width:12px;
+	height:16px;
+	line-height: 16px;
+	/*float:left;*/
+	display: inline-block;
+	cursor:pointer;
+	vertical-align: middle;
+}
+.zl_radio_disabled{
+	background:url(../images/radio_disabled.png) no-repeat 0 1px;
+	width:auto;
+	min-width:12px;
+	height:16px;
+	line-height: 16px;
+	display: inline-block;
+	float:left;
+	cursor:pointer;
+}
+.zl_radio input[type="radio"] {
+	filter: Alpha(opacity=0);
+	-moz-opacity:0; 
+	opacity:0;
+	padding:0px;
+	margin:0px;
+	float:left;
+}

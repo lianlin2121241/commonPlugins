@@ -1,0 +1,168 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" type="text/css" href="css/content.css">
+    <script type="text/javascript" src="../../../libs/jquery-1.8.3.js"></script>
+    <script type="text/javascript" src="../../../libs/jquery-ui/jquery.ui.core.min.js"></script>
+    <script type="text/javascript" src="../../../libs/jquery-ui/jquery.ui.widget.min.js"></script>
+    <script type="text/javascript" src="../../../libs/jquery-ui/jquery.ui.position.min.js"></script>
+    <script type="text/javascript" src="js/jquery.zl_select_u1.js"></script>
+    <title></title>
+    <style type="text/css">
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+        select{
+            margin: 0px;
+            padding: 0px;
+        }
+    </style>
+    <script>
+        var newAdd;
+        $(function () {
+            newAdd = $("select.a").zl_select({
+                w: 200
+                , h: 30
+                , items_w: "auto"
+            });
+            $("select.b").zl_select({
+                w: 300
+                , h: 30
+            });
+        })
+        function select_two() {
+            $(">select", ".zl_select").val("2");
+            $(">select", ".zl_select").trigger("change");
+        }
+        function select_four() {
+            $(">select", ".zl_select").val("4");
+            $(">select", ".zl_select").trigger("change");
+        }
+        function clone() {
+            var a = $("#test").clone(true).removeAttr("id");
+            a.appendTo("#selectPanel");
+            a.zl_select({
+                w: 200
+                , h: 30
+            })
+        }
+        function tt(obj) {
+            alert($(obj).val())
+        }
+        function addItems() {
+            $("<option value='6'>六</option>").appendTo("select.a");
+            $("<option value='7'>七</option>").appendTo("select.a");
+            newAdd.reloadData($(".a"));
+        }
+    </script>
+
+</head>
+<body>
+<div id="selectPanel">
+    <!--<div class="zl_select a">
+        <select onchange="tt(this)">
+            <option value="1">第一项</option>
+            <option value="2">第二项</option>
+            <option value="3">第三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三项</option>
+            <option value="4" selected="selected">第四项</option>
+            <option value="5">第五项</option>
+        </select>
+    </div>
+
+    <div class="zl_select a">
+        <select>
+            <option value="1">一</option>
+            <option value="2">二</option>
+            <option value="3">三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三</option>
+            <option value="4" selected="selected">四</option>
+            <option value="5">五</option>
+        </select>
+    </div>
+    <div class="zl_select a">
+        <select>
+            <option value="1">1一</option>
+            <option value="2">1二</option>
+            <option value="3">1三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三</option>
+            <option value="4" selected="selected">1四</option>
+            <option value="5">1五</option>
+        </select>
+    </div>
+    <div class="zl_select a">
+        <select>
+            <option value="1">12一</option>
+            <option value="2">12二</option>
+            <option value="3">12三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三</option>
+            <option value="4" selected="selected">12四</option>
+            <option value="5">12五</option>
+        </select>
+    </div>
+    <div class="zl_select b">
+        <select>
+            <option value="1">一</option>
+            <option value="2">二</option>
+            <option value="3">三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三</option>
+            <option value="4" selected="selected">四</option>
+            <option value="5">五</option>
+        </select>
+    </div>-->
+    <select class="a" onchange="tt(this)">
+        <option value="1">第一项</option>
+        <option value="2">第二项</option>
+        <option value="3">第三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三项</option>
+        <option value="4" selected="selected">第四项</option>
+        <option value="5">第五项</option>
+    </select><select class="a">
+        <option value="1">一</option>
+        <option value="2">二</option>
+        <option value="3">三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三</option>
+        <option value="4" selected="selected">四</option>
+        <option value="5">五</option>
+    </select><select class="a">
+        <option value="1">1一</option>
+        <option value="2">1二</option>
+        <option value="3">1三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三</option>
+        <option value="4" selected="selected">1四</option>
+        <option value="5">1五</option>
+    </select><select class="a">
+        <option value="1">12一</option>
+        <option value="2">12二</option>
+        <option value="3">12三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三</option>
+        <option value="4" selected="selected">12四</option>
+        <option value="5">12五</option>
+    </select>
+    <select id="test" style="display: none;">
+        <option value="1">一</option>
+        <option value="2">二</option>
+        <option value="3">三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三</option>
+        <option value="4" selected="selected">四</option>
+        <option value="5">五</option>
+    </select>
+
+    <!--<div id="" style="overflow: hidden;height: 80px;position: absolute; bottom: 0px; width: 100%; border: 1px solid">
+        <div style=" width: 100px; height: 100px; position: absolute;top: -50px;left: 400px; background:red;"></div>
+        <div style="margin-top: 20px;">
+        <select class="b">
+            <option value="1">一</option>
+            <option value="2">二</option>
+            <option value="3">三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三</option>
+            <option value="4" selected="selected">四</option>
+            <option value="5">五</option>
+            <option value="5">五</option>
+            <option value="5">五</option>
+            <option value="5">五</option>
+            <option value="5">五</option>
+            <option value="5">五</option>
+            <option value="5">五</option>
+            <option value="5">五</option>
+        </select>
+        </div>
+    </div>-->
+</div>
+<button onClick="select_two()">第二项</button>
+<button onClick="select_four()">第四项</button>
+<button onClick="clone()">克隆</button>
+<button onClick="addItems()">动态增加选项</button>
+</body>
+</html>

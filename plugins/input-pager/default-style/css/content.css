@@ -1,0 +1,80 @@
+﻿/* CSS Document */
+.input-pager-msg{
+ 	overflow: hidden;
+	text-align: center;
+	font-size: 12px;
+	font-family: \5FAE\8F6F\96C5\9ED1;
+	color: #999999;
+}
+.input-pager-msg-span{
+	padding: 0px 16px 0px 14px;
+	vertical-align: middle;
+}
+.input-pager-ul{
+	overflow: hidden;
+	display: inline-block;
+	vertical-align: middle;
+	list-style: none;
+	padding: 0px;
+	margin: 0px;
+}
+
+.input-pager-button{
+	vertical-align: middle;
+	display: inline-block;
+	list-style: none;
+	margin: 0px 4px 0px 4px;
+}
+.input-pager-pgFirst{
+
+}
+.input-pager-pgPrev{
+
+}
+.input-pager-pgNext{
+
+}
+.input-pager-pgEnd{
+
+}
+
+.input-pager-icon{
+	vertical-align: middle;
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	background: url("../images/pagination.png") no-repeat 0px 0px;
+	cursor: pointer;
+}
+.icon-pager-first{
+	background-position: 2px -60px;
+}
+.icon-pager-prev{
+	background-position: 4px 4px;
+}
+.icon-pager-next{
+	background-position: 5px -28px;
+}
+.icon-pager-end{
+	background-position: 3px -92px;
+}
+.input-pager-state-disabled .input-pager-icon{
+	background-image: url(../images/pagination_g.png);
+	cursor: default;
+}
+
+.input-pager-input-li{
+	list-style: none;
+	vertical-align: middle;
+	display: inline-block;
+}
+.input-pager-input{
+	width: 22px;
+	height: 16px;
+	line-height: 16px;
+	border: 1px solid #dddddd;
+	font-family: inherit;
+	font-size: inherit;
+	text-align: center;
+	color: inherit;
+}

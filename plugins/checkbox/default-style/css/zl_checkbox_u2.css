@@ -1,0 +1,35 @@
+/* CSS Document */
+.zl_ck{
+	display: inline-block;
+}
+.zl_checkbox_normal{
+	background:url(../images/checkbox.png) no-repeat  0px center;
+	/*cursor:pointer;*/
+}
+.zl_checkbox_checked{
+	background: url(../images/checkbox_down.png) no-repeat  0px center;
+	/*cursor: pointer;*/
+}
+.zl_checkbox_normal_disabled{
+	background:url(../images/checkbox_disabled.png) no-repeat  0px center;
+	/*cursor:pointer;*/
+}
+.zl_checkbox_checked_disabled{
+	background:url(../images/checkbox_down_disabled.png) no-repeat  0px center;
+	/*cursor:pointer;*/
+}
+.zl_ck input[type="checkbox"]{
+	filter: Alpha(opacity=0);
+	-moz-opacity:0;
+	opacity:0;
+	padding:0px;
+	margin:0px;
+	width: 20px;
+	height: 20px;
+	outline: none;
+	vertical-align: middle;
+}
+.zl_ck .chb_label{
+	vertical-align: middle;
+	margin-left: 2px;
+}

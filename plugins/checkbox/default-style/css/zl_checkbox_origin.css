@@ -1,0 +1,24 @@
+/* CSS Document */
+.zl_ck_normal{
+	background:url(../images/checkbox.png) no-repeat;
+	width:20px;
+	height:20px;
+	float:left;
+	cursor:pointer;
+}
+.zl_ck_down{
+	background:url(../images/checkbox_down.png) no-repeat;
+	width:20px;
+	height:20px;
+	float:left;
+	cursor:pointer;
+}
+.zl_ck input[type="checkbox"]{
+	filter: Alpha(opacity=0);
+	-moz-opacity:0; 
+	opacity:0;
+	padding:0px;
+	margin:0px;
+	width:20px;
+	height:20px;
+}

@@ -1,0 +1,110 @@
+﻿/* CSS Document */
+.pagination {
+	font-size: 80%;
+	display: inline-block;
+}
+.pagination a {
+	text-decoration: none;
+	color: #666666;
+	line-height: 16px;
+	/* background: #FFFFFF; */
+	/* border: 1px solid #CCCCCC; */
+	width: 20px;
+	padding: 8px 0;
+	height: 16px;
+	vertical-align: middle;
+	margin: 0px 2px;
+}
+.pagination a:hover {
+	background: #cfebed;
+	border-radius: 4px;
+}
+.pagination .current {
+	width: 26px;
+	height: 16px;
+	vertical-align: middle;
+	padding: 0;
+	line-height: 16px;
+	padding: 7px 0px;
+}
+.pagination .current .page_current_l{
+	width: 0px;
+	/* height: 28px; */
+	position: relative;
+	vertical-align: middle;
+	/* line-height: 28px; */
+	float: left;
+}
+.pagination .current .page_current_r{
+	width:0px;
+	/*height:28px;*/
+	vertical-align: middle;
+   	/*line-height:28px;*/
+	float:left;
+	position:relative;
+}
+.pagination .current .page_current_m{
+	width: 26px;
+	height: 16px;
+	vertical-align: middle;
+	line-height: 14px;
+	position: relative;
+	float: left;
+	color: #359ea4;
+	font-size: 14px;
+	/* background: #f5f5f5; */
+	/* border: 1px solid #DDDDDD; */
+}
+.pagination .prev div{
+	width: 16px !important;
+	height: 16px;
+	background: url(../images/pagination.png) no-repeat 0px 2px;
+	margin-left: 5px;
+}
+.pagination .next div{
+	width: 16px !important;
+	height: 16px;
+	background: url(../images/pagination.png) no-repeat 8px -30px;
+	margin-right: 5px;
+}
+.pagination .next,.pagination .prev{
+	width: 16px !important;
+	border: none;
+}
+.pagination .current.prev div{
+	background: url(../images/pagination_g.png) no-repeat 0px 2px;
+}
+.pagination .current.next div{
+	background: url(../images/pagination_g.png) no-repeat 8px -30px;
+}
+.pagination .first div{
+	width: 16px !important;
+	height: 16px;
+	background: url("../images/pagination.png") no-repeat 0px -62px;
+	vertical-align: middle;
+	margin: 0px 4px 0px 0px;
+	cursor: pointer;
+}
+.pagination .last{
+	margin-left: 5px;
+}
+.pagination .last div{
+	width: 16px !important;
+	height: 16px;
+	background: url("../images/pagination.png") no-repeat 0px -94px;
+	vertical-align: middle;
+	margin: 0px 0px 0px 3px;
+	cursor: pointer;
+}
+.pagination .last,.pagination .first{
+	width: 16px !important;
+	border: none;
+}
+.pagination .current.first div{
+	background-image:url(../images/pagination_g.png) ;
+	cursor:inherit;
+}
+.pagination .current.last div{
+	background-image:url(../images/pagination_g.png) ;
+	cursor:inherit;
+}

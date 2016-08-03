@@ -1,0 +1,53 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="css/zl_radio_u1.css">
+	<script type="text/javascript" src="../../../libs/jquery-1.8.3.js"></script>
+<script type="text/javascript" src="js/jquery.zl_radio_u1.js"></script>
+<title></title>
+<style>
+.ul_style{
+	list-style:none;
+	font-size:12px;
+	margin:0px;
+	padding:0px;
+}
+.ul_style li{
+	list-style:none;
+	display:inline;
+	float:left;
+}
+</style>
+<script>
+$(function(){
+	$(".zl_radio").zl_radio();
+
+	$("#chbTest").click(function() {
+		if ($(this).is(":checked")) {
+			$("#aa,#bb").prop("disabled",false)
+					.each(function(){
+						$(this).trigger("changeState");
+					});
+		}else{
+			$("#aa,#bb").prop("disabled",true)
+					.each(function(){
+						$(this).trigger("changeState");
+					});
+		}
+	})
+})
+</script>
+</head>
+<body>
+<input type="checkbox" id="chbTest" checked="checked"/><label for="chbTest">测试</label>
+<ul class="ul_style">
+	<li>所在机房：</li>
+	<li>
+				<label><input id="aa"  type="radio" class="zl_radio" checked="checked" name="account_type_rad"  value="1" /><span>全部账户</span></label>
+				<input id="bb" type="radio" class="zl_radio" name="account_type_rad" value="2" />
+				<span>仅子账户</span>
+	</li>
+</ul>
+</body>
+</html>

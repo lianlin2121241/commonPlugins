@@ -1,0 +1,37 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="css/content.css">
+	<script type="text/javascript" src="../../../libs/jquery-1.8.3.js"></script>
+<script type="text/javascript" src="js/jquery.defaultMsg.js"></script>
+<title></title>
+<style type="text/css">
+ul{list-style:none;}
+ul li{margin:10px;padding:0px ;}
+.forms_default_style {
+	border: 0px solid #aaaaaa;
+}
+</style>
+<script>
+$(function(){
+	$(".forms_default_style").formsStyle({
+		hasClose:true,
+		hasEnter:false,
+		enterCallback:function(text){
+			console.log(text)
+		}
+	});
+})
+</script>
+</head>
+<body>
+<ul>
+	<li><input class="forms_default_style" type="text" msg="输入用户名，支持大小写、数字、字母" style="width:240px;"></li>
+	<li><textarea class="forms_default_style" msg="请输入您的邮箱地址" style="width:200px;height:150px;overflow:hidden"></textarea></li>
+	<li><input class="forms_default_style" type="text" msg="请输入您的姓名" ></li>
+	<li><input class="forms_default_style" type="text" msg="请输入您的手机号码" ></li>
+	<li><input class="forms_default_style" type="text" msg="请输入您的座机号码" ></li>
+</ul>
+</body>
+</html>

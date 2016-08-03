@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<!-- saved from url=(0029)http://justjavac.com/img2txt/ -->
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta charset="UTF-8">
+    <title>img2txt：基于canvas的图片转字符画工具</title>
+</head>
+<body>
+<style type="text/css">
+    @font-face {
+        font-family: 'courierregular';
+        src: url('fonts/courier-webfont.eot');
+        src: url('fonts/courier-webfont.eot?#iefix') format('embedded-opentype'),
+        url('fonts/courier-webfont.woff2') format('woff2'),
+        url('fonts/courier-webfont.woff') format('woff'),
+        url('fonts/courier-webfont.ttf') format('truetype'),
+        url('fonts/courier-webfont.svg#courierregular') format('svg');
+        font-weight: normal;
+        font-style: normal;
+    }
+    /* contnet */
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-size: 12px;
+        font-family: courierregular;
+        background: #fff;
+    }
+
+    p {
+        height: 12px;
+        white-space: nowrap;
+    }
+
+    p.ts {
+        margin: 10px 0 0 0;
+        width: 500px;
+        float: left;
+    }
+
+    span {
+        width: 12px;
+    }
+
+    #cv, #txt {
+        float: left;
+    }
+
+    #cv {
+        margin-right: 5px;
+    }
+
+    .bt {
+        height: 37px;
+        display: none;
+    }
+
+    form, input {
+        width: 73px;
+        height: 27px;
+    }
+
+    form {
+        position: relative;
+        float: left;
+        margin: 0 10px 0 0;
+    }
+
+    #up-button {
+        position: absolute;
+        right: 0;
+        top: 0;
+        cursor: pointer;
+        opacity: 0;
+        filter: alpha(opacity=0);
+        outline: none;
+    }
+
+    #button {
+    }
+
+    iframe {
+        display: none;
+    }
+
+    .v-fork-me {
+        position: absolute;
+        right: 0;
+        top: 68px;
+        z-index: 999;
+    }
+
+    /*@media screen and (max-width:360px) {
+        body {
+            font-size: 24px;
+        }
+    }*/
+</style>
+<div class="bt">
+    <form id="uf">
+        <input type="file" name="file" id="up-button">
+        <!--<input type="button" id="button" value="选择图片">-->
+    </form>
+</div>
+基于canvas的图片转字符画工具基于canvas的图片转字符画工具基于canvas的图片转字符画工具
+<canvas id="cv">fuck ie</canvas>
+<div id="txt"></div>
+<script src="./img2txt.js"></script>
+</body>
+</html>

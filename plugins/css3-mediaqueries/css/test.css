@@ -1,0 +1,25 @@
+.list{
+    font-size: 0px;
+}
+.item{
+    display: inline-block;
+    width: 25%;
+    height: 200px;
+    box-sizing: border-box;
+    border: 1px solid #dddddd;
+}
+@media screen and (max-width: 980px) {
+    .item{
+        width: 33.3%;
+    }
+}
+@media screen and (max-width: 600px) {
+    .item{
+        width: 50%;
+    }
+}
+@media screen and (max-width: 500px) {
+    .item{
+        width: 100%;
+    }
+}

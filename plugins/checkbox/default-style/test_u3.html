@@ -1,0 +1,85 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" type="text/css" href="css/zl_checkbox_u3.css">
+    <script type="text/javascript" src="../../../libs/jquery-1.8.3.js"></script>
+    <script type="text/javascript" src="js/jquery.zl_checkbox_u3.js"></script>
+    <title></title>
+    <style>
+        /**{
+            margin: 0px;
+            padding: 0px;
+        }*/
+        .ul_style {
+            list-style: none;
+            font-size: 12px;
+            margin: 0px;
+            padding: 0px;
+        }
+
+        .ul_style .chbtest{
+            /*margin: 10px 0px 0px 23px;*/
+        }
+
+        .ul_style li {
+            list-style: none;
+            display: inline;
+            float: left;
+        }
+
+        .all_account {
+            float: left;
+            clear: left;
+        }
+
+        .all_sonaccount {
+            float: left;
+            margin-left: 20px;
+        }
+        .all_account span {
+            margin-top: 3px;
+            vertical-align: middle;
+            display: inline-block;
+        }
+
+        .all_sonaccount span {
+            margin-top: 3px;
+            margin-left: 5px;
+            float: left;
+        }
+
+    </style>
+    <script>
+        $(function () {
+            $(".chbtest").zl_checkbox();
+            $(".checkbox").zl_checkbox();
+            $("#chbTest").click(function() {
+                if ($(this).is(":checked")) {
+                    $("#aa,#cc").prop("disabled",false)
+                        .each(function(){
+                            $(this).trigger("changeState");
+                        });
+                }else{
+                    $("#aa,#cc").prop("disabled",true)
+                        .each(function(){
+                            $(this).trigger("changeState");
+                        });
+                }
+            })
+        })
+    </script>
+</head>
+<body>
+<input type="checkbox" id="chbTest" checked="checked"/><label for="chbTest">测试</label>
+<ul class="ul_style">
+    <li>所在机房：</li>
+    <li>
+        <label><input id="aa" class="checkbox" checked type="checkbox"/>华苑机房</label>
+        <input id="cc" type="checkbox" class="checkbox"/><span style="vertical-align: middle;">fewef</span>
+
+        <label><input class="chbtest" type="checkbox"/>小树林机房</label>
+    </li>
+</ul>
+</body>
+</html>

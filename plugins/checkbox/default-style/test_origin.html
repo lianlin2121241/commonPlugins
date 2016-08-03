@@ -1,0 +1,75 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" type="text/css" href="css/zl_checkbox_origin.css">
+    <script type="text/javascript" src="../../common/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="js/jquery.zl_checkbox_origin.js"></script>
+    <title></title>
+    <style>
+        .ul_style {
+            list-style: none;
+            font-size: 12px;
+            margin: 0px;
+            padding: 0px;
+        }
+
+        .ul_style li {
+            list-style: none;
+            display: inline;
+            float: left;
+        }
+
+        .all_account {
+            float: left;
+            clear: left;
+        }
+
+        .all_sonaccount {
+            float: left;
+            margin-left: 20px;
+        }
+
+        .all_account span {
+            margin-top: 3px;
+            margin-left: 5px;
+            float: left;
+        }
+
+        .all_sonaccount span {
+            margin-top: 3px;
+            margin-left: 5px;
+            float: left;
+        }
+    </style>
+    <script>
+        $(function () {
+            $(".zl_ck").zl_checkbox({
+                afterEvent: function (chEle, chPanel) {
+                    console.log($(chEle).is(":checked"));
+                    console.log(chPanel);
+                }
+            });
+        })
+    </script>
+</head>
+<body>
+<ul class="ul_style">
+    <li>所在机房：</li>
+    <li>
+        <div class="all_account">
+            <div class="zl_ck zl_ck_down zz">
+                <input id="aa" checked type="checkbox"/>
+                <span for="aa">华苑机房</span>
+            </div>
+        </div>
+        <div class="all_sonaccount">
+            <div class="zl_ck zl_ck_normal">
+                <input id="bb" type="checkbox"/>
+            </div>
+            <span for="bb">小树林机房</span>
+        </div>
+    </li>
+</ul>
+</body>
+</html>

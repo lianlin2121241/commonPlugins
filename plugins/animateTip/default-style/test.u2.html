@@ -1,0 +1,101 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link rel="stylesheet" type="text/css" href="css/content.css">
+	<script type="text/javascript" src="../../../libs/jquery-1.8.3.js"></script>
+	<script type="text/javascript" src="../../../libs/jquery-ui/jquery.ui.core.min.js"></script>
+	<script type="text/javascript" src="../../../libs/jquery-ui/jquery.ui.widget.min.js"></script>
+	<script type="text/javascript" src="../../../libs/jquery-ui/jquery.ui.position.min.js"></script>
+	<script type="text/javascript" src="../../velocity/js/velocity.js"></script>
+	<script type="text/javascript" src="js/jquery.animateTip.u2.js"></script>
+	<title></title>
+	<style type="text/css">
+		ul{
+			list-style: none;
+		}
+		li{
+			list-style: none;
+			width: 100px;
+			height: 20px;
+			margin: 4px;
+			line-height: 20px;
+			border: 1px solid #cccccc;
+		}
+	</style>
+	<script>
+		$(function(){
+			$(".hover").animateTip({
+				my:"right-16 middle",
+				at:"left middle",
+			});
+			$(".click").animateTip({
+				my:"left+16 middle",
+				at:"right middle",
+				eventType:"click"
+			});
+			$(".top").animateTip({
+				my:"center bottom-16",
+				at:"center top",
+				timeoutDelay:1000
+			});
+			$(".left").animateTip({
+				my:"right-16 middle",
+				at:"left middle"
+			});
+			$(".bottom").animateTip({
+				my:"center top+16",
+				at:"center bottom"
+			});
+			$(".right").animateTip({
+				my:"left+16 middle",
+				at:"right middle"
+			});
+			$(".clickEvent").animateTip({
+				text:"的味道夫为恶服务",
+				my:"left+16 middle",
+				at:"right middle",
+				eventType:"click"
+			});
+			$(".more").animateTip({
+				my:"right+16 top+16",
+				at:"right bottom",
+				eventType:"click",
+				width: 200,
+				multiple:true,
+				arrowStyle:{
+					"left":"auto",
+					"right":"14px"
+				}
+			});
+			$(".fade").animateTip({
+				my:"center top+16",
+				at:"center bottom",
+				animateType:"fade",
+				delay:500
+			});
+			$(".show").animateTip({
+				my:"center top+16",
+				at:"center bottom",
+				animateType:"show"
+			});
+		})
+	</script>
+</head>
+<body>
+	<ul style="margin-top: 150px; margin-left: 100px;">
+		<li class="hover" data-tip="显示0">hover显示</li>
+		<li class="hover" data-tip="显示1">hover显示</li>
+		<li class="click" data-tip="显示2">click显示</li>
+		<li class="click" data-tip="显示3">click显示</li>
+		<li class="top" data-tip="显示4">上</li>
+		<li class="left" data-tip="显示5">左</li>
+		<li class="bottom" data-tip="显示6">下</li>
+		<li class="right" data-tip="显示7">右</li>
+		<li class="clickEvent">点击显示</li>
+		<li class="more" data-tip="显示延迟时间显示延迟时间显示延迟时间显示延迟时间显示延迟时间显示延迟时间显示延迟时间显示延迟时间显示延迟时间显示延迟时间显示延迟时间显示延迟时间显示延迟时间显示延迟时间显示延迟时间显示延迟时间显示延迟时间显示延迟时间显示延迟时间显示延迟时间显示延迟时间显示延迟时间显示延迟时间显示延迟时间显示延迟时间显示延迟时间显示延迟时间显示延迟时间">显示长数据</li>
+		<li class="fade" data-tip="显示5">fade</li>
+		<li class="show" data-tip="显示5">show</li>
+	</ul>
+</body>
+</html>

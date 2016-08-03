@@ -1,0 +1,49 @@
+/* CSS Document */
+.animate-tip-panel{
+	position: absolute;
+	background: #ffffff;
+	border: 1px solid #cccccc;
+	z-index: 999999;
+	border-radius: 6px;
+}
+.animate-tip-content{
+	max-width: 500px;
+	max-height: 300px;
+	padding: 8px 8px;
+	text-align: left;
+	font-family: \5FAE\8F6F\96C5\9ED1;
+	font-size: 12px;
+	line-height: 20px;
+	color: #555555;
+	white-space: nowrap;
+}
+.animate-tip-arrow{
+	width: 16px;
+	height: 16px;
+	position: absolute;
+	background: url("../images/tip-arrow.png") no-repeat 0px 0px;
+}
+.animate-tip-arrow.left.middle{
+	background-position: 1px -48px;
+	top: 50%;
+	left: -16px;
+	margin-top: -8px;
+}
+.animate-tip-arrow.right.middle{
+	background-position: -1px -16px;
+	top: 50%;
+	right: -16px;
+	margin-top: -8px;
+}
+.animate-tip-arrow.center.top,.animate-tip-arrow.left.top,.animate-tip-arrow.right.top{
+	background-position: 0px 1px;
+	top: -16px;
+	left: 50%;
+	margin-left: -8px;
+}
+.animate-tip-arrow.center.bottom,.animate-tip-arrow.left.bottom,.animate-tip-arrow.right.bottom{
+	background-position: 0px -33px;
+	bottom: -16px;
+	left: 50%;
+	margin-left: -8px;
+}

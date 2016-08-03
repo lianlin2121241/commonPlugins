@@ -1,0 +1,36 @@
+/* CSS Document */
+.check_label{
+	display: inline-block;
+	position: relative;
+	overflow: hidden;
+	line-height: 20px;
+	vertical-align: middle;
+}
+.icon_checkbox{
+	width: 20px;
+	height: 20px;
+	display: inline-block;
+	vertical-align: middle;
+	margin-right: 3px;
+	float: left;
+}
+.checkbox_normal .icon_checkbox{
+	background:url(../images/checkbox.png) no-repeat  0px center;
+	/*cursor:pointer;*/
+}
+.checkbox_checked .icon_checkbox{
+	background: url(../images/checkbox_down.png) no-repeat  0px center;
+	/*cursor: pointer;*/
+}
+.checkbox_normal_disabled .icon_checkbox{
+	background:url(../images/checkbox_disabled.png) no-repeat  0px center;
+	/*cursor:pointer;*/
+}
+.checkbox_checked_disabled .icon_checkbox{
+	background:url(../images/checkbox_down_disabled.png) no-repeat  0px center;
+	/*cursor:pointer;*/
+}
+.check_ele{
+	position: absolute;
+	left: -999em;
+}

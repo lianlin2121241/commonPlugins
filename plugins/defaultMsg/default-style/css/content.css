@@ -1,0 +1,38 @@
+/* CSS Document */
+.div_forms{
+/*	border:1px solid #cccccc;*/
+	padding:0px;
+	display: inline-block;
+	position: relative;
+}
+.forms_default_style{
+	border:0px;
+	outline:none;
+	color:#a0a0a0;
+	font-size:12px;
+	margin-left:2px;
+	float:left;
+	position:absolute;
+	background:url(0) no-repeat;
+}
+.div_text{
+	position:absolute;
+	color:#a0a0a0;
+	font-size:12px;
+	height: 17px;
+	line-height: 17px;
+}
+.btn_empty{
+	height: 16px;
+	width: 16px;
+	display: inline-block;
+	position: absolute;
+	background: url("../images/btn_empty.png") no-repeat 0px 0px;
+}
+.btn_enter{
+	height: 16px;
+	width: 16px;
+	display: inline-block;
+	position: absolute;
+	background: url("../images/btn_enter.png") no-repeat 0px 0px;
+}

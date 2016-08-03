@@ -1,0 +1,26 @@
+/* CSS Document */
+.zl_ck{
+}
+.zl_ck_normal{
+	background:url(../images/checkbox.png) no-repeat 0px 50%;
+	/*cursor:pointer;*/
+}
+.zl_ck_down{
+	background: url(../images/checkbox_down.png) no-repeat 0px 50%;
+	/*cursor: pointer;*/
+}
+.zl_ck input[type="checkbox"]{
+	filter: Alpha(opacity=0);
+	-moz-opacity:0;
+	opacity:0;
+	padding:0px;
+	margin:0px;
+	width:14px;
+	height:14px;
+	outline: none;
+	vertical-align: middle;
+}
+.zl_ck .chb_label{
+	vertical-align: middle;
+	margin-left: 2px;
+}
