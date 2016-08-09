@@ -1,5 +1,5 @@
 ﻿/*!
- * zl_select Javascript Library
+ * writeinput Javascript Library
  * troila.com - v1.0.0 (2016-07-28T10:07:24+0800)
  * http://troila.com/ | Released under MIT license
  *
@@ -7,311 +7,152 @@
  */
 (function ($) {
     var writeinputFun=(function(){
-        /**
-         * @class zl_select 下拉框插件类
-         * @constructor
-         * @param {Element} elem 下拉列表DOM元素
-         * @param {Object} options 插件参数
-         */
         function writeinput(elem,options){
             this.elem=elem;
             this.settings=$.extend(true, {},$.fn.writeinput.defults,options||{});
             this.init();
         }
-        //插件原型
         writeinput.prototype={
-            /**
-             * 初始化方法
-             */
             init:function(){
                 var self=this;
                 self.createContainer();
-                self.createDrop();
                 self.event();
-                !!self.settings.completeCallback&&self.settings.completeCallback(self);
             },
-            /**
-             * 创建插件显示结构
-             */
             createContainer:function(){
                 var self=this;
                 self.elem.addClass("writeinput_panel");
                 self.inputPanel=$('<div class="itemWraper"></div>');
-                self.inputEle=$('<input type="text" class="selItem" maxlength="100"/>');
-                self.inputSpan=$('<span class="inputSpan"></span>');
+                self.inputEle=$('<input type="text" class="inputEle" maxlength="'+self.settings.maxlength+'"/>');
+                self.inputSpan=$('<span class="inputSpan"></span>')
+                    .css("fontSize",self.inputEle.css("fontSize"))
+                    .css("fontFamily",self.inputEle.css("fontFamily"));
                 this.initInputEle();
                 self.inputEle.add(self.inputSpan).appendTo(self.inputPanel);
                 self.elem.append(self.inputPanel);
-
-
-
-
-                self.randomStr=self._randomString(6);
-                self.elem.attr("data-id",self.randomStr);
-                self.container = $("<a class='select-container' onclick='return false;' href='#' tabindex='-1' />");
-                self.content = $("<span class='content'></span>");
-                self.icon = $("<span class='icon'></span>");
-                self.icon.appendTo(self.container);
-                self.content.appendTo(self.container);
-                if(self.elem.prop("disabled")){
-                    self.container.addClass("disabled");
-                }
-                if(self.elem.val()!=""){
-                    self.container.addClass("has-val");
-                }
-                self.selectPanel =self.elem.wrap("<div class='zl_select' style='display:inline-block;'></div>").closest(".zl_select");
-                self.selectDropPanel=self.settings.selectDropPanel||self.selectPanel;
-                self.container.appendTo(self.selectPanel);
-                self.containerPadding=parseInt(self.container.css("paddingLeft"),10)+parseInt(self.container.css("paddingRight"),10);
-                self.container.width(self.containerW-self.containerPadding)
-                    .height(self.containerH)
-                    .css("line-height", (self.containerH) + "px");
-                self.iconw = self.icon.outerWidth();
-                self.content.css("marginRight",self.iconw);
-                self.elem.hide();
             },
             initInputEle:function(){
-                self.elem.width(this.settings.inputWidth);
+                var self=this;
+                self.inputEle.width(this.settings.inputWidth);
             },
-            inputKeyPressHandle:function(e){
-
+            inputPropertyHandle:function(e){
+                var self=this;
+                self.setInputWidth();
             },
             inputKeyUpHandle:function(e){
                 var self=this;
-                var eleVal=self.getInputVal();
-
-                if(e.keyCode && e.keyCode == 186){
-                    var strArray = str.split(";");
-                    if(!!strArray[0]){
-                        creatItem(obj);
-                    }
-                    $(obj).val("");
-                    $(obj).css({"width":"10px"});
-                    return true;
+                var textVal=self.getInputVal();
+                if(textVal.indexOf(";")<0&& e.keyCode!=13){
+                    return;
+                }
+                var strArray=textVal.split(";");
+                if(!strArray[0]){
+                    self.clearWritePlugins();
+                    return;
+                }
+                self.clearWritePlugins();
+                self.inputEle.focus();
+                self.createItem(strArray[0]);
+            },
+            eleKeyUpHandle:function(e){
+                var self=this;
+                if((e.keyCode!=8&&e.keyCode!=46)||self.inputEle.is(":focus")){
+                    return;
+                }
+                var $activeItem=$(".enterBlock.active",self.elem);
+                if ($activeItem.length==0){
+                    return;
+                }
+                $activeItem.remove();
+            },
+            clickItemHandle:function(e){
+                e.stopPropagation();
+                var panel=$(this).parent()
+                $(".enterBlock",panel).removeClass("active");
+                $(this).addClass("active");
+            },
+            clickEleHandle:function(e){
+                e.stopPropagation();
+                var self=this;
+                self.inputEle.focus();
+            },
+            clickDocumentHandle:function(e){
+                var self=this;
+                $(".enterBlock",self.elem).removeClass("active");
+            },
+            createItem:function(str){
+                var self=this;
+                var itemStr='<div class="enterBlock" data-val="'+str+'">'
+                                +'<b>'+str+'</b>'
+                                +'<span class="semicolon">;</span>'
+                            +'</div>'
+                var showItem=$(itemStr);
+                showItem.insertBefore(self.inputPanel);
+                if(!self.validate(str)){
+                    showItem.addClass("item-error")
                 }
             },
+            clearWritePlugins:function(){
+                var self=this;
+                self.initInputEle();
+                self.inputEle.val("")
+                self.inputSpan.text("");
+            },
             getInputVal:function(){
-                return this.converEnd(this.inputEle.val());
+                var self=this;
+                return self.convertEnd(self.inputEle.val());
+            },
+            setInputWidth:function(){
+                var self=this;
+                var eleVal=self.getInputVal();
+                self.inputSpan.text(eleVal);
+                var spanWidth=self.inputSpan.width();
+                self.inputEle.width(spanWidth+16);
             },
             convertEnd:function(str){
                 str=str.replace(/；/ig,';');
                 return str;
             },
-            /**
-             * 创建插件下拉列表结构
-             */
-            createDrop:function(){
+            validate:function(str){
                 var self=this;
-                self.drop = $("<div class='select-drop' />");
-                self.items = $("<ul class='items' />");
-                self.items.appendTo(self.drop);
-                self.items_maxW=self.settings.items_w||self.container.innerWidth();
-                self.items_minW=self.container.innerWidth();
-                self.drop.appendTo(self.selectDropPanel)
-                    .css({
-                        "minWidth":self.items_minW,
-                        "width":self.items_maxW
-                    });
-                self.settings.items_h&&drop.css("maxHeight",self.settings.items_h);
-                self.drop.attr("data-for",self.randomStr);
-                !!$.fn.niceScroll&&self.drop.niceScroll(self.settings.scrollStyle);
-                self._init_item()
+                if(!self.settings.filter){
+                    return true
+                }
+                return self.settings.filter.test(str);
             },
-            /**
-             * 初始化下拉列表项
-             */
-            _init_item:function(){
+            addData:function(data){
                 var self=this;
-                var opts, sv;
-                self.items.empty();
-                opts = self.elem.find("option");
-                sv = self.elem.val();
-                //分解select元素项，构建select组件结构。
-                opts.each(function (index, data) {
-                    var ele = $("<li />");
-                    ele.appendTo(self.items);
-                    var txt = $(data).text();
-                    var val = $(data).attr("value");
-                    ele.text(txt);
-                    ele.attr("v", val);
-                    if (sv == val) {
-                        //设置默认当前值
-                        self.content.text(txt);
-                        ele.addClass("down");
-                    }
-                })
+                var datalen=data.length;
+                for(var i=0;i<datalen;i++){
+                    self.createItem(data[i]);
+                }
             },
-            /**
-             * 重新加载数据
-             */
-            reloadData:function(){
-                var self=this;
-                self._init_item();
-            },
-            /**
-             * 改变状态
-             */
-            changeState:function(){
-                var self=this;
-                self.elem.prop("disabled")?self.container.addClass("disabled"):self.container.removeClass("disabled");
-            },
-            /**
-             * 隐藏下拉列表
-             */
-            hideDrop:function(){
-                var self=this;
-                self.drop.hide();
-                !!$.fn.mousewheel&&$(document).unmousewheel();
-                $(document).add($(top.document)).off("mousedown.zl_select");
-                self.clearState();
-            },
-            /**
-             * 清除状态
-             */
-            clearState:function(){
-                var self=this;
-                self.drop.removeClass("positionBottom positionTop");
-                self.container.removeClass("positionBottom positionTop active");
-            },
-            /**
-             * 销毁方法
-             */
             distory:function(){
                 var self=this;
-                self.elem.removeData("data-select").show();
-                self.selectPanel.before(self.elem);
-                self.selectPanel.remove();
-                self.drop.remove();
+                self.elem.off(".writeinputevent");
+                $(document).off(".writeinputevent");
+                self.elem.empty();
             },
-            /**
-             * 添加事件
-             */
+            clear:function(){
+                var self=this;
+                $(".enterBlock",self.elem).remove();
+                self.clearWritePlugins();
+            },
             event:function(){
                 var self=this;
-                //组件下拉列表事件
-                self.drop
-                    .on("click", "li",function () {
-                        var v = $(this).attr("v");
-                        self.elem.val(v).trigger("change");
-                        self.content.text($(this).text());
-                        $("li", self.items).removeClass("down");
-                        $(this).addClass("down");
-                        self.hideDrop();
-                    })
-                    .on("mouseover","li",function(){
-                        $(this).addClass("over");
-                    })
-                    .on("mouseout","li",function(){
-                        $(this).removeClass("over");
-                    })
+                self.elem
+                    .on("input.writeinputevent property.writeinputevent",self.inputEle,self.inputPropertyHandle.bind(self))
+                    .on("keyup.writeinputevent",self.inputEle,self.inputKeyUpHandle.bind(self))
+                    .on("click.writeinputevent",".enterBlock",self.clickItemHandle)
+                    .on("click.writeinputevent",self.clickEleHandle.bind(self))
 
-                //select控件change事件
-                self.elem.on( "change", function () {
-                    var sv = self.elem.val();
-                    $("li", self.items).each(function (i, ele) {
-                        var v = $(ele).attr("v");
-                        if (sv == v) {
-                            self.content.text($(ele).text());
-                            $("li", self.items).removeClass("down");
-                            $(ele).addClass("down");
-                            return false;
-                        }
-                    })
-                    if(sv!=""){
-                        self.container.addClass("has-val");
-                    }else{
-                        self.container.removeClass("has-val");
-                    }
-                })
-
-                //select组件内容框绑定事件。
-                self.container.on("click", function (e) {
-                    //e.stopPropagation();
-                    if($(this).hasClass("disabled")){
-                        !!self.settings.disabledClickCallback&&self.settings.disabledClickCallback.call(self);
-                        return false;
-                    }
-                    if (self.drop.is(":hidden")) {
-                        self.drop.show()
-                            .position({
-                                my: "left top",
-                                at: "left bottom",
-                                of: $(this),
-                                using:self._positionUsing
-                            })
-                        self.container.addClass("active");
-                        !!$.fn.mousewheel&&$(document).mousewheel(function(e){
-                            var e=e||window.event;
-                            var tag=e.srcElement||e.target;
-                            if($(tag).closest(".select-drop").length==0){
-                                self.hideDrop();
-                            }
-                        });
-                        $(document).add($(top.document)).on("mousedown.zl_select", function (e) {
-                            var e=e||window.event;
-                            var tag=e.srcElement||e.target;
-                            //点击事件触发元素是select组件内容框时，不隐藏select组件下拉项。
-                            if (isNotClickContainer()) {
-                                self.hideDrop();
-                            }
-                            //$(document).add($(top.document)).off("mousedown.zl_select");
-                            //判断是否没有点中下拉控件
-                            function isNotClickContainer(){
-                                var container=$(tag).closest(".select-container");
-                                var drop=$(tag).closest(".select-drop");
-                                var nicescroll=$(tag).closest(".nicescroll-rails");
-                                var isNotClickContainer=container.length == 0||container[0]!=self.container[0];
-                                var isNotClickDrop=drop.length == 0||drop[0]!=self.drop[0];
-                                var isNotClickScroll=!$.fn.niceScroll?true:(function(){
-                                    return nicescroll.length == 0||
-                                        nicescroll.closest(".nicescroll-rails").prev(".select-drop").length == 0||
-                                        nicescroll.closest(".nicescroll-rails").prev(".select-drop")[0]!=self.drop[0]
-                                })()
-                                return isNotClickContainer&&isNotClickDrop&&isNotClickScroll
-                            }
-                        })
-                    } else {
-                        self.hideDrop();
-                    }
-                })
+                $(document)
+                    .on("keyup.writeinputevent",self.elem,self.eleKeyUpHandle.bind(self))
+                    .on("click.writeinputevent",self.clickDocumentHandle.bind(self))
             },
-            /**
-             * position插件定位方法
-             * @param {Object} position 定位对象
-             * @param {Object} feedback 定位位置对象
-             */
-            _positionUsing:function(position, feedback){
-                $(this).css( position );
-                if(feedback.vertical=="bottom"){
-                    feedback.target.element.add(feedback.element.element).addClass("positionBottom");
-                }else if(feedback.vertical=="top"){
-                    feedback.target.element.add(feedback.element.element).addClass("positionTop");
-                }
-            },
-            /**
-             * 获取随机ID
-             * @param {Number} len 随机数长度
-             * @returns {string} 随机字符串
-             */
-            _randomString:function(len){
-                len = len || 32;
-                var $chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678';
-                var maxPos = $chars.length;
-                var str = '';
-                for (i = 0; i < len; i++) {
-                    str += $chars.charAt(Math.floor(Math.random() * maxPos));
-                }
-                return str;
-            }
         }
-        return zl_select;
+        return writeinput;
     })()
-    /**
-     * zl_select插件
-     * @param {Object} options 插件参数
-     * @returns {*} 选择器元素
-     */
-    $.fn.writeinput=function(options){
+    $.fn.writeinput=function(options,data){
         return $(this).each(function(index, el) {
             var elem=$(this),
                 writeinput=elem.data("data-writeinput");
@@ -320,22 +161,13 @@
                 elem.data("data-writeinput",writeinput);
             }
             if(typeof options=="string"){
-                return writeinput[options]();
+                return writeinput[options](data);
             }
         });
     }
-    //zl_select默认参数
     $.fn.writeinput.defults={
         inputWidth: 10,
-
-        h: 26,
-        items_w: null,
-        items_h: null,
-        selectDropPanel:null,
-        disabledClickCallback: $.noop(),
-        completeCallback:$.noop(),
-        scrollStyle:{
-            autohidemode:false
-        }
+        filter:null,
+        maxlength:40
     }
 })(jQuery);

@@ -1,25 +1,19 @@
-/************************************告警策略设置************************************/
-.email-panel{
-    display: inline-block;
-    width:336px;
-    min-height:52px;
-    padding:0 10px;
-    background-color:#f4f4f4;
-    border:1px solid #999;
-    border-radius:12px;
-}
-/***********邮箱输入 start***********/
-.editContainer {
+.itemWraper {
+    float: left;
     overflow: hidden;
+    width: auto;
+    position: relative;
 }
-.selItem {
+.inputEle,.inputSpan {
+    font-size: 12px;
+    font-family: "微软雅黑";
+}
+.inputEle{
     width: auto;
     max-width: 475px;
     overflow: hidden;
     text-overflow: ellipsis;
     border: 0px;
-    font-size: 12px;
-    font-family: "微软雅黑";
     float: left;
     outline: none;
     line-height: 22px;
@@ -28,10 +22,10 @@
     margin-left:5px;
     background-color: #f4f4f4;
 }
-.itemWraper {
-    float: left;
-    overflow: hidden;
-    width: auto;
+.inputSpan{
+    position: absolute;
+    visibility: hidden;
+    left: -999999px;
 }
 .enterBlock {
     float: left;
@@ -53,14 +47,17 @@
     overflow: hidden;
     line-height: 24px;
 }
+.enterBlock.item-error b {
+    color: red;
+}
 .enterBlock span {
     float: left;
     line-height: 24px;
 }
-.enterBlock_over {
-    background: #f0f0f0;
+.enterBlock.item-error span {
+    color: red;
 }
-.enterBlock_select {
+.enterBlock.active {
     background: #cccccc;
 }
 .selItem_new {
