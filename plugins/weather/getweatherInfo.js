@@ -1,5 +1,5 @@
 var weather = function (rootpath) {
-    var route = $.trim(rootpath)+"js/plugins/weather/weatherImg";
+    var route = "weatherImg";
     var dateArr=[];
     window.getWeatherList=[];
     this.getWeather = function (city) {
@@ -108,12 +108,19 @@ var weather = function (rootpath) {
         for (i in SWther.w) {
             var tianqi = SWther.w[i][0].s1;
             var tianqiImg = dis_img(tianqi);
+            //alert(s1);
             var t1 = SWther.w[i][0].t1;
             var t2 = SWther.w[i][0].t2;
-            $("#weatherName").html(tianqi);
-            $("#temperature").html(t2 + "~" + t1 + " &#8451;");
-            $("#imgWeather").attr({"src": tianqiImg, "alt": tianqi});
-            dateArr=SWther.w[i];
+            var fl = SWther.w[i][0].d1;
+            var fs = SWther.w[i][0].p1;
+            var st1 = " 最高气温：" + t1 + "&deg;";
+            var st2 = " 最低气温：" + t2 + "&deg; ";
+            var s = fl + " " + fs + "级";
+            $("#cityTQ")[0].innerHTML = tianqi;
+            $('#cityTQIMG')[0].innerHTML = "<img class='weather_img' src='" + tianqiImg + "' title='" + tianqi + "' alt='" + tianqi + "' />";
+            $("#cityTQInfo2")[0].innerHTML = st1;
+            $("#cityTQInfo1")[0].innerHTML = st2;
+            $("#cityTQInfo")[0].innerHTML = s;
         }
         var nowDate=new Date();
         var nowDateStr=nowDate.pattern("yyyy-MM-dd");
