@@ -21,8 +21,8 @@
 }
 
 .pagination .current {
-    color: #fff;
-	/*border: solid 1px #AAE;*/
+    color: red;
+    /* border: solid 1px #AAE; */
 }
 
 .pagination .current.first,.pagination .current.last,.pagination .current.prev, .pagination .current.next{

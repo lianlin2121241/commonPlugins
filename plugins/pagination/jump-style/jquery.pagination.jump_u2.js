@@ -9,46 +9,45 @@
  */
 jQuery.fn.pagination = function(maxentries, opts) {
 	opts = jQuery.extend({
-		items_per_page: 10,
-		num_display_entries: 10,
-		current_page: 0,
-		num_edge_entries: 0,
-		link_to: "#",
-		first_text: "First",
-		prev_text: "Prev",
-		next_text: "Next",
-		last_text: "Last",
-		jump_text: "Jump",
-		isSum: true,
-		isJump: true,
+		items_per_page: 10,			//每页显示条数
+		num_display_entries: 5,		//中间显示分页数控制，一般为奇数
+		current_page: 1,			//当前选中页数
+		num_edge_entries: 0,		//边缘保留页码个数
+		link_to: "#",				//跳转按钮链接属性
+		first_text: "First",		//首页按钮文本
+		prev_text: "Prev",			//上一页按钮文本
+		next_text: "Next",			//下一页按钮文本
+		last_text: "Last",			//尾页按钮文本
+		jump_text: "Jump",			//跳转按钮文本
+		isSum: true,				//是否显示当前条数
+		isJump: true,				//是否显示跳转部分
 		jump_format_text: "页码格式错误",
 		jump_outofrange_text: "页码超出范围",
 		jump_null_text: "页码不能为空",
 		ellipse_text: "...",
-		first_show_always: true,
-		prev_show_always: true,
-		next_show_always: true,
-		last_show_always: true,
-		callback: function() {
+		first_show_always: true,	//是否显示首页按钮
+		prev_show_always: true,		//是否显示上一页按钮
+		next_show_always: true,		//是否显示下一页按钮
+		last_show_always: true,		//是否显示尾页按钮
+		callback: function() {		//页面跳转回调	
 			return true;
 		}
 	}, opts || {});
 
 	return this.each(function() {
 		/**
-		 * Calculate the maximum number of pages
+		 * 计算分页个数（总条数/每页显示条数）
 		 */
 		function numPages() {
 			return Math.ceil(maxentries / opts.items_per_page);
 		}
 
 		/**
-		 * Calculate start and end point of pagination links depending on 
-		 * current_page and num_display_entries.
-		 * @return {Array}
+		 * 获取中间分页起止位置
+		 * @return {Array} [开始位置，结束位置]
 		 */
 		function getInterval() {
-			var ne_half = Math.ceil(opts.num_display_entries / 2);
+			var ne_half = Math.floor(opts.num_display_entries / 2);
 			var np = numPages();
 			var upper_limit = np - opts.num_display_entries;
 			var start = current_page > ne_half ? Math.max(Math.min(current_page - ne_half, upper_limit), 0) : 0;
@@ -57,14 +56,15 @@ jQuery.fn.pagination = function(maxentries, opts) {
 		}
 
 		/**
-		 * This is the event handling function for the pagination links. 
-		 * @param {int} page_id The new page number
+		 * 点击分页链接执行选择 
+		 * @param {int} page_id 页码
 		 */
 		function pageSelected(page_id, evt) {
 			current_page = page_id;
 			drawLinks();
 			var continuePropagation = opts.callback(page_id, panel);
 			if (!continuePropagation) {
+				//如果为false阻止冒泡
 				if (evt.stopPropagation) {
 					evt.stopPropagation();
 				} else {
@@ -91,7 +91,7 @@ jQuery.fn.pagination = function(maxentries, opts) {
 			var appendItem = function(page_id, appendopts) {
 					page_id = page_id < 0 ? 0 : (page_id < np ? page_id : np - 1); // Normalize page id to sane value
 					appendopts = jQuery.extend({
-						text: page_id + 1,
+						text: page_id,
 						classes: ""
 					}, appendopts || {});
 					if (page_id == current_page) {
@@ -114,7 +114,7 @@ jQuery.fn.pagination = function(maxentries, opts) {
 			// Generate "First"-Link
 			if (opts.first_text && (current_page > 0 || opts.first_show_always)) {
 
-				appendItem(0, {
+				appendItem(1, {
 					text: opts.first_text,
 					classes: "first"
 				});
@@ -127,18 +127,18 @@ jQuery.fn.pagination = function(maxentries, opts) {
 				});
 			}
 			// Generate starting points
-			if (interval[0] > 0 && opts.num_edge_entries > 0) {
+			if (interval[0] >1 && opts.num_edge_entries > 0) {
 				var end = Math.min(opts.num_edge_entries, interval[0]);
 				for (var i = 0; i < end; i++) {
-					appendItem(i);
+					appendItem(i+1);
 				}
 				if (opts.num_edge_entries < interval[0] && opts.ellipse_text) {
 					jQuery("<span>" + opts.ellipse_text + "</span>").appendTo(panel);
 				}
 			}
 			// Generate interval links
-			for (var i = interval[0]; i < interval[1]; i++) {
-				appendItem(i);
+			for (var i = interval[0]; i <= interval[1]; i++) {
+				appendItem(i+1);
 			}
 			// Generate ending points
 			if (interval[1] < np && opts.num_edge_entries > 0) {
@@ -147,14 +147,14 @@ jQuery.fn.pagination = function(maxentries, opts) {
 				}
 				var begin = Math.max(np - opts.num_edge_entries, interval[1]);
 				for (var i = begin; i < np; i++) {
-					appendItem(i);
+					appendItem(i+1);
 				}
 			}
 
 
 			// Generate "Next"-Link
 			if (opts.next_text && (current_page < np - 1 || opts.next_show_always)) {
-				appendItem(current_page + 1, {
+				appendItem(current_page, {
 					text: opts.next_text,
 					classes: "next"
 				});
