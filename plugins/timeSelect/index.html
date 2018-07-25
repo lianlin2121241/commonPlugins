@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="jquery.timeSelectPugin.css">
+    <title>Document</title>
+</head>
+<body>
+    <div id="timeSelectPanel" style="width: 600px;margin-left: 200px; margin-top: 100px;">
+        <div class="time-select-warp">
+            <div class="time-select-line">
+                <div class="time-select-line-plan">
+                    <span class="time-select-line-plan-point">
+                        <span class="time-select-line-plan-tip">
+                            <span class="time-select-line-plan-tip-text">2017-07-23</span>
+                            <span class="time-select-line-plan-tip-arraw"></span>
+                        </span>
+                    </span>
+                </div>
+            </div>
+            <div class="time-select-mark">
+                <span class="time-select-mark-end">2017-07-23</span>
+                <span class="time-select-mark-begin">2017-07-30</span>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="jquery.timeSelectPugin.js"></script>
+<script>
+    $(function(){
+        $("#timeSelectPanel").timeSelect({
+            data:["2017-07-22","2017-07-23"]
+        })
+    })
+</script>
+</html>

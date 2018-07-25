@@ -1,0 +1,81 @@
+@charset "utf-8";
+.time-select-warp{
+    position: relative;
+}
+.time-select-line{
+    width: 100%;
+    border: 1px solid #cccccc;
+    height: 12px;
+    border-radius: 6px;
+}
+.time-select-line-plan{
+    height: 100%;
+    /* background: #dddddd; */
+    position: relative;
+    width: 0%;
+    text-align: right;
+}
+.time-select-line-plan-point{
+    width: 14px;
+    height: 14px;
+    border: 1px solid #80b5da;
+    background: #dddddd;
+    display: inline-block;
+    transform: translateX(50%);
+    border-radius: 50%;
+    position: absolute;
+    right: 0px;
+    top: -2px;
+}
+.time-select-line-plan-tip{
+    position: absolute;
+    bottom: 26px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #dddddd;
+    border-radius: 4px;
+    padding: 4px 8px;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+}
+.time-select-line-plan-tip-text{
+    font-family: \5FAE\8F6F\96C5\9ED1;
+    color: #666666;
+    white-space: nowrap;
+}
+.time-select-line-plan-tip-arraw{
+    position: absolute;
+    top:100%;
+    left: 50%;
+    width:0px;
+    height: 0px;
+    border-top:10px solid #dddddd; 
+    border-left:10px solid transparent; 
+    border-right:10px solid transparent; 
+    border-bottom:10px solid transparent; 
+    transform: translateX(-50%);
+}
+.time-select-mark{
+    width: 100%;
+}
+.time-select-mark-begin{
+    float: left;
+    transform: translateX(-50%);
+}
+.time-select-mark-end{
+    float: right;
+    transform: translateX(50%);
+}
+
+.tubiaobtn{
+    transform: translateX(-84px);
+    color:#5b92ca;
+    font-size:30px;
+    float: left;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    cursor: pointer;
+}
