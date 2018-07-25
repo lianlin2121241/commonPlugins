@@ -4,6 +4,7 @@
         this.data = this.settings.data;
         this.html = dom;
         this.dataLength = this.data.length;
+        //如果数据不为大于等于2个的数组则无法渲染
         if (Object.prototype.toString.call(this.data) !== '[object Array]' || this.dataLength < 2) {
             return;
         }
@@ -15,17 +16,20 @@
         this.currentValue = this.data[this.currentIndex]; //当前轴所在的值
 
         this.render();
-        this.timeSelectLineDom = $(".time-select-line", this.html);
-        this.lineWidth = this.timeSelectLineDom.width();
-        this.lineBox = this.timeSelectLineDom[0].getBoundingClientRect();
+        this.timeSelectLineDom = $(".time-select-line", this.html); //事件轴dom
+        this.lineWidth = this.timeSelectLineDom.width();    //事件轴长度
+        this.lineBox = this.timeSelectLineDom[0].getBoundingClientRect();   //获取时间轴的位置信息
         this.bindEvent();
 
+        //如果能够播放
         if(this.settings.canPlay){
+            //如果能够自动播放
             if(this.settings.isAutoPlay){
                 this.play();
             }
             this.appendPlayButton();
         }
+        //先触发一个事件轴改变事件
         this.settings.timeChange.call(this,this.currentValue);
     }
     timeSelect.prototype = {
@@ -82,6 +86,7 @@
         bindEvent: function () {
             var self = this;
             this.html
+                //播放按钮点击
                 .on("click", ".tubiaobtn", function (e) {
                     if($(this).hasClass("fa-pause-circle")){
                         $(this).removeClass("fa-pause-circle").addClass("fa-play-circle");
@@ -95,12 +100,14 @@
                         self.play();
                     }
                 })
+                //时间轴点击
                 .on("click", ".time-select-line", function (e) {
                     $(".tubiaobtn",self.html).removeClass("fa-pause-circle").addClass("fa-play-circle");
                     self.stop();
                     var mouseSite = self.correction0100((e.clientX - self.lineBox.left) / self.lineWidth * 100);
                     self.setIndexValue(mouseSite,true);
                 })
+                //时间点鼠标点击事件
                 .on("mousedown", ".time-select-line-plan-point", function (e) {
                     e.stopPropagation();
                     $(".tubiaobtn",self.html).removeClass("fa-pause-circle").addClass("fa-play-circle");
