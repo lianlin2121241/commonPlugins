@@ -20,6 +20,7 @@
         this.lineWidth = this.timeSelectLineDom.width();    //事件轴长度
         this.lineBox = this.timeSelectLineDom[0].getBoundingClientRect();   //获取时间轴的位置信息
         this.bindEvent();
+        this.initSite();
 
         //如果能够播放
         if(this.settings.canPlay){
@@ -29,8 +30,6 @@
             }
             this.appendPlayButton();
         }
-        //先触发一个事件轴改变事件
-        this.settings.timeChange.call(this,this.currentValue);
     }
     timeSelect.prototype = {
         //设置轴节点比例
@@ -89,7 +88,6 @@
                 //播放按钮点击
                 .on("click", ".tubiaobtn", function (e) {
                     if($(this).hasClass("fa-pause-circle")){
-                        $(this).removeClass("fa-pause-circle").addClass("fa-play-circle");
                         self.stop();
                     }else{
                         var linePlanWidth=$(".time-select-line-plan",self.html).width();
@@ -102,7 +100,6 @@
                 })
                 //时间轴点击
                 .on("click", ".time-select-line", function (e) {
-                    $(".tubiaobtn",self.html).removeClass("fa-pause-circle").addClass("fa-play-circle");
                     self.stop();
                     var mouseSite = self.correction0100((e.clientX - self.lineBox.left) / self.lineWidth * 100);
                     self.setIndexValue(mouseSite,true);
@@ -110,7 +107,6 @@
                 //时间点鼠标点击事件
                 .on("mousedown", ".time-select-line-plan-point", function (e) {
                     e.stopPropagation();
-                    $(".tubiaobtn",self.html).removeClass("fa-pause-circle").addClass("fa-play-circle");
                     self.stop();
                     $(document).on("mousemove.timeSelect", function (e) {
                         var mouseSite = self.correction0100((e.clientX - self.lineBox.left) / self.lineWidth * 100);
@@ -137,7 +133,6 @@
                         linePlanWidth=0;
                     }else{
                         linePlanWidth=self.lineWidth;
-                        $(".tubiaobtn",self.html).removeClass("fa-pause-circle").addClass("fa-play-circle");
                         self.stop();
                     }
                 }
@@ -147,7 +142,11 @@
         },
         //停止
         stop:function(){
-            this.intervalHandle&&clearInterval(this.intervalHandle)&&(this.intervalHandle=null);
+            if(this.intervalHandle){
+                clearInterval(this.intervalHandle);
+                this.intervalHandle=null;
+                $(".tubiaobtn",self.html).removeClass("fa-pause-circle").addClass("fa-play-circle");
+            }
         },
         //设置移动到的位置数据
         setIndexValue:function(value,isManual){
@@ -172,6 +171,14 @@
                 btnDom.addClass("fa-play-circle");
             }
             $(".time-select-warp",this.html).prepend(btnDom);
+        },
+        //初始化位置
+        initSite:function(){
+            $(".time-select-line-plan",this.html).width(0);
+            this.currentIndex=0;
+            this.currentValue = this.data[this.currentIndex];
+            //先触发一个事件轴改变事件
+            this.settings.timeChange.call(this,this.currentValue);
         }
     }
     timeSelect.util = {
@@ -202,8 +209,8 @@
             console.log(value);
         },//日期改变回调
         playStep:50, //播放步频，每秒多少像素
-        isLoop:true,    //是否循环
-        isAutoPlay:false, //是否播放
+        isLoop:false,    //是否循环
+        isAutoPlay:true, //是否播放
         canPlay:true    //允许播放
     }
 })(jQuery);

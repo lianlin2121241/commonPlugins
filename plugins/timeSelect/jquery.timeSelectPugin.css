@@ -16,16 +16,16 @@
     text-align: right;
 }
 .time-select-line-plan-point{
-    width: 14px;
-    height: 14px;
+    width: 10px;
+    height: 18px;
     border: 1px solid #80b5da;
     background: #dddddd;
     display: inline-block;
     transform: translateX(50%);
-    border-radius: 50%;
+    border-radius: 3px;
     position: absolute;
     right: 0px;
-    top: -2px;
+    top: -4px;
 }
 .time-select-line-plan-tip{
     position: absolute;
@@ -34,39 +34,45 @@
     transform: translateX(-50%);
     background: #dddddd;
     border-radius: 4px;
-    padding: 4px 8px;
-    -webkit-user-select:none;
-    -moz-user-select:none;
-    -ms-user-select:none;
-    user-select:none;
+    padding: 2px 6px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 .time-select-line-plan-tip-text{
     font-family: \5FAE\8F6F\96C5\9ED1;
     color: #666666;
     white-space: nowrap;
+    font-size: 13px;
 }
 .time-select-line-plan-tip-arraw{
     position: absolute;
-    top:100%;
+    top: 100%;
     left: 50%;
-    width:0px;
+    width: 0px;
     height: 0px;
-    border-top:10px solid #dddddd; 
-    border-left:10px solid transparent; 
-    border-right:10px solid transparent; 
-    border-bottom:10px solid transparent; 
+    border-top: 6px solid #dddddd;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 6px solid transparent;
     transform: translateX(-50%);
 }
 .time-select-mark{
     width: 100%;
+    margin-top: 5px;
 }
 .time-select-mark-begin{
     float: left;
     transform: translateX(-50%);
+    color: #666666;
+    font-size: 13px;
 }
 .time-select-mark-end{
     float: right;
     transform: translateX(50%);
+    color: #666666;
+    font-size: 13px;
 }
 
 .tubiaobtn{
