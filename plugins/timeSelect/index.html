@@ -20,6 +20,9 @@
                         </span>
                     </span>
                 </div>
+                <span class="time-select-line-mousemark" style="left:20%;">
+                    <span class="time-select-line-mousemark-text">2017-07-23</span>
+                </span>
             </div>
             <div class="time-select-mark">
                 <span class="time-select-mark-end">2017-07-23</span>
@@ -38,10 +41,18 @@
                 console.log("fwefwe"+value);
             },
             playStep:50,
-            isLoop:false,
+            isLoop:true,
             isAutoPlay:true,
             canPlay:true
         })
+
+        setTimeout(function(){
+            $("#timeSelectPanel").timeSelect("setData",["2017-08-22","2017-08-23","2017-08-24","2017-08-25","2017-08-26","2017-08-27","2017-08-28","2017-08-29","2017-08-30","2017-08-31","2017-09-01"])
+        },5000)
+
+        /* setTimeout(function(){
+            $("#timeSelectPanel").timeSelect("destroy");
+        },10000) */
     })
 </script>
 </html>

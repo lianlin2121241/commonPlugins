@@ -4,34 +4,39 @@
         this.data = this.settings.data;
         this.html = dom;
         this.dataLength = this.data.length;
-        //如果数据不为大于等于2个的数组则无法渲染
-        if (Object.prototype.toString.call(this.data) !== '[object Array]' || this.dataLength < 2) {
+        this.isMousedown=false;
+        if (!this.validateData(this.data)) {
             return;
         }
-        this.pointList = [];  //轴节点比例
-        this.setPointList();
-        this.middlePointList = [];    //轴节点中点比例
-        this.setMiddlePointList();
+        
         this.currentIndex = 0;  //当前轴所在索引
         this.currentValue = this.data[this.currentIndex]; //当前轴所在的值
 
-        this.render();
-        this.timeSelectLineDom = $(".time-select-line", this.html); //事件轴dom
-        this.lineWidth = this.timeSelectLineDom.width();    //事件轴长度
-        this.lineBox = this.timeSelectLineDom[0].getBoundingClientRect();   //获取时间轴的位置信息
+        this.init();
         this.bindEvent();
-        this.initSite();
-
-        //如果能够播放
-        if(this.settings.canPlay){
-            //如果能够自动播放
-            if(this.settings.isAutoPlay){
-                this.play();
-            }
-            this.appendPlayButton();
-        }
     }
     timeSelect.prototype = {
+        //初始化
+        init:function(){
+            this.pointList = [];  //轴节点比例
+            this.middlePointList = [];    //轴节点中点比例
+            this.setPointList();
+            this.setMiddlePointList();
+            this.render();
+            this.timeSelectLineDom = $(".time-select-line", this.html); //事件轴dom
+            this.lineWidth = this.timeSelectLineDom.width();    //事件轴长度
+            this.lineBox = this.timeSelectLineDom[0].getBoundingClientRect();   //获取时间轴的位置信息
+            this.initSite();
+    
+            //如果能够播放
+            if(this.settings.canPlay){
+                //如果能够自动播放
+                if(this.settings.isAutoPlay){
+                    this.play();
+                }
+                this.appendPlayButton();
+            }
+        },
         //设置轴节点比例
         setPointList: function () {
             var step = 100 / (this.dataLength-1);
@@ -81,6 +86,14 @@
             htmlArr.push('</div>');
             this.html.html(htmlArr.join(""));
         },
+        //获取鼠标移上时标记
+        getMouseMarkHtml:function(){
+            var htmlArr = [];
+            htmlArr.push('<span class="time-select-line-mousemark">');
+            htmlArr.push('    <span class="time-select-line-mousemark-text"></span>');
+            htmlArr.push('</span>');
+            return htmlArr.join("");
+        },
         //事件绑定
         bindEvent: function () {
             var self = this;
@@ -108,14 +121,35 @@
                 .on("mousedown", ".time-select-line-plan-point", function (e) {
                     e.stopPropagation();
                     self.stop();
+                    self.isMousedown=true;
+                    $(".time-select-line-mousemark",self.html).remove();
                     $(document).on("mousemove.timeSelect", function (e) {
                         var mouseSite = self.correction0100((e.clientX - self.lineBox.left) / self.lineWidth * 100);
                         self.setIndexValue(mouseSite,true);
                     })
                     $(document).on("mouseup.timeSelect", function (e) {
                         e.stopPropagation();
+                        self.isMousedown=false;
                         $(document).off(".timeSelect");
                     })
+                })
+                //鼠标移动
+                .on("mousemove",".time-select-line",function(e){
+                    if(self.isMousedown){
+                        return;
+                    }
+                    var mousemarkDom=$(".time-select-line-mousemark",self.html);
+                    if(mousemarkDom.length==0){
+                        $(".time-select-line",self.html).append(self.getMouseMarkHtml());
+                    }
+                    var mouseSite = self.correction0100((e.clientX - self.lineBox.left) / self.lineWidth * 100);
+                    var indexValueObj = self.getIndexValueBySite(mouseSite);
+                    $(".time-select-line-mousemark-text",self.html).html(indexValueObj.value);
+                    $(".time-select-line-mousemark",self.html).css({left:mouseSite+"%"});
+                })
+                //鼠标移出
+                .on("mouseleave",".time-select-line",function(){
+                    $(".time-select-line-mousemark",self.html).remove();
                 })
         },
         //矫正超出100的值
@@ -179,6 +213,28 @@
             this.currentValue = this.data[this.currentIndex];
             //先触发一个事件轴改变事件
             this.settings.timeChange.call(this,this.currentValue);
+        },
+        //销毁
+        destroy:function(){
+            this.stop();
+            this.html.empty();
+            this.html.off("click mousedown mousemove mouseleave");
+        },
+        //重置数据
+        setData:function(data){
+            if(!this.validateData(data)){
+                return;
+            }
+            this.data = data;
+            this.dataLength = this.data.length;
+            this.stop();
+        
+            this.init();
+        },
+        //验证数据
+        validateData:function(data){
+            //数据为大于等于2个的数组
+            return Object.prototype.toString.call(this.data) === '[object Array]' && this.dataLength >1
         }
     }
     timeSelect.util = {
@@ -191,6 +247,7 @@
      * @returns {*} 选择器元素
      */
     $.fn.timeSelect = function (options) {
+        var arg=Array.prototype.slice.apply(arguments);
         return $(this).each(function (index, el) {
             var elem = $(this),
                 timeSelectInstance = elem.data("data-timeSelect");
@@ -199,7 +256,7 @@
                 elem.data("data-timeSelect", timeSelectInstance);
             }
             if (typeof options == "string") {
-                return timeSelectInstance[options]();
+                return timeSelectInstance[options].apply(timeSelectInstance,arg.splice(1,arg.length-1));
             }
         });
     }

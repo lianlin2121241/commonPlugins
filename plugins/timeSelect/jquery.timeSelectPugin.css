@@ -7,6 +7,8 @@
     border: 1px solid #cccccc;
     height: 12px;
     border-radius: 6px;
+    position: relative;
+    cursor: pointer;
 }
 .time-select-line-plan{
     height: 100%;
@@ -57,6 +59,23 @@
     border-right: 6px solid transparent;
     border-bottom: 6px solid transparent;
     transform: translateX(-50%);
+}
+.time-select-line-mousemark{
+    position: absolute;
+    height: 18px;
+    width: 0px;
+    border-left: 1px solid #5b92ca;
+    top: 0px;
+    transform: translateY(-3px);
+}
+.time-select-line-mousemark-text{
+    white-space: nowrap;
+    position: absolute;
+    bottom: 23px;
+    left: 0px;
+    transform: translateX(-50%);
+    font-size: 12px;
+    color: #5b92ca;
 }
 .time-select-mark{
     width: 100%;
